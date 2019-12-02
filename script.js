@@ -37,26 +37,64 @@ const mashPotatoes = [
 
 
   
-function makeFood(steps, id){
-  for(const step of steps){
-
-    //This function adds food to the list ==>  addFood('take steak from fridge', #steak)
-    addFood(step,id) 
-
-  }
+function makeFoodSteak(steps, id){
+  addFood(steps[0], id, () => {
+    addFood(steps[1], id, () => {
+      addFood(steps[2], id, () => {
+        addFood(steps[3], id, () => {
+          addFood(steps[4], id, () => {
+            addFood(steps[5], id, () => {
+              addFood(steps[6], id, () => {
+                addFood(steps[7], id, () => {
+                  document.querySelector('#table').innerHTML += (`<img src="images/${id.replace('#','')}.jpg" />`);
+                })
+              })
+            })
+          })
+        })
+      })
+    })
+  })
 
   //Adds image to the table div
-  document.querySelector('#table').innerHTML += (`<img src="images/${id.replace('#','')}.jpg" />`)
+  // document.querySelector('#table').innerHTML += (`<img src="images/${id.replace('#','')}.jpg" />`)
 
   //Use once all food is made 
   //document.body.innerHTML += `<button onclick="new Audio('dinnerIsServed.mp3').play()">Dinner is Served!</button>`
   
 }
 
+function makeFoodPotatoes(steps, id){
+  addFood(steps[0], id).then(() => {
+    addFood(steps[1], id).then(() => {
+      addFood(steps[2], id).then(() => {
+        addFood(steps[3], id).then(() => {
+          addFood(steps[4], id).then(() => {
+            document.querySelector('#table').innerHTML += (`<img src="images/${id.replace('#','')}.jpg" />`);
+          })
+        })
+      })
+    })
+  })
+}
 
-makeFood(steak, '#steak')
-makeFood(mashPotatoes, '#mashPotatoes')
-makeFood(brusselSprouts, '#brusselSprouts')
+async function makeFoodBrusselSprouts(steps, id){
+  await addFood(steps[0], id)
+  await addFood(steps[1], id)
+  await addFood(steps[2], id)
+  await addFood(steps[3], id)
+  await addFood(steps[4], id)
+  await addFood(steps[5], id)
+  await addFood(steps[6], id)
+  await addFood(steps[7], id)
+  await addFood(steps[8], id)
+  document.querySelector('#table').innerHTML += (`<img src="images/${id.replace('#','')}.jpg" />`);
+}
+
+
+makeFoodSteak(steak, '#steak')
+makeFoodPotatoes(mashPotatoes, '#mashPotatoes')
+makeFoodBrusselSprouts(brusselSprouts, '#brusselSprouts')
 
 
 
